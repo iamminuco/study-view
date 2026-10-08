@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>잠긴 페이지</title>
+<style>
+body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;background:#f2f4f6;font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;color:#191f28}
+form{background:#fff;padding:28px 24px;border-radius:16px;width:min(320px,calc(100vw - 32px));box-sizing:border-box;box-shadow:0 2px 12px rgba(0,0,0,.06)}
+h1{font-size:18px;margin:0 0 16px}
+input[type=password]{width:100%;box-sizing:border-box;font-size:16px;padding:12px;border:1px solid #d1d6db;border-radius:10px}
+label{display:flex;gap:6px;align-items:center;font-size:14px;color:#4e5968;margin:12px 0}
+button{width:100%;font-size:16px;padding:12px;border:0;border-radius:10px;background:#3182f6;color:#fff;font-weight:600}
+#msg{min-height:20px;font-size:14px;color:#e5484d;margin:10px 0 0}
+</style></head><body>
+<form id="f" hidden>
+<h1>비밀번호를 넣는다</h1>
+<input id="pw" type="password" autocomplete="current-password" autofocus>
+<label><input id="keep" type="checkbox" checked> 이 기기에서 기억</label>
+<button>열기</button>
+<p id="msg"></p>
+</form>
+<script>
+(function () {
+  var SALT = "+sX6bxiJP11sGpNerndvtw==", ITER = 600000, IV = "N9df50/Mg2mHvVHT", DATA = "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";
+  var STORE = "lockedPagesKey:" + SALT;
+  function b64(s) { var b = atob(s), u = new Uint8Array(b.length); for (var i = 0; i < b.length; i++) u[i] = b.charCodeAt(i); return u; }
+  function get() { try { return localStorage.getItem(STORE); } catch (e) { return null; } }
+  function put(v) { try { v ? localStorage.setItem(STORE, v) : localStorage.removeItem(STORE); } catch (e) {} }
+  async function unlock(raw) {
+    var key = await crypto.subtle.importKey("raw", raw, "AES-GCM", false, ["decrypt"]);
+    var zipped = await crypto.subtle.decrypt({ name: "AES-GCM", iv: b64(IV) }, key, b64(DATA));
+    var stream = new Blob([zipped]).stream().pipeThrough(new DecompressionStream("gzip"));
+    return new Response(stream).text();
+  }
+  function show(html) {
+    document.open(); document.write(html); document.close();
+    window.dispatchEvent(new Event("resize"));
+  }
+  // 폰에서 키보드가 떠 있는 채로 페이지를 그리면 줄어든 높이가 남아 화면이 잘린다.
+  // 입력칸 초점을 빼고 화면 높이가 더 바뀌지 않을 때까지(최대 1.5초) 기다린다.
+  function keyboardDown() {
+    if (document.activeElement) document.activeElement.blur();
+    return new Promise(function (done) {
+      var last = -1, still = 0, tries = 0;
+      (function check() {
+        var h = window.visualViewport ? window.visualViewport.height : window.innerHeight;
+        still = h === last ? still + 1 : 0; last = h;
+        if (still >= 3 || ++tries > 30) done(); else setTimeout(check, 50);
+      })();
+    });
+  }
+  async function derive(pw) {
+    var base = await crypto.subtle.importKey("raw", new TextEncoder().encode(pw), "PBKDF2", false, ["deriveBits"]);
+    return new Uint8Array(await crypto.subtle.deriveBits({ name: "PBKDF2", hash: "SHA-256", salt: b64(SALT), iterations: ITER }, base, 256));
+  }
+  var f = document.getElementById("f"), msg = document.getElementById("msg");
+  f.onsubmit = async function (e) {
+    e.preventDefault();
+    msg.textContent = "여는 중…";
+    try {
+      var raw = await derive(document.getElementById("pw").value);
+      var html = await unlock(raw);
+      if (document.getElementById("keep").checked) put(btoa(String.fromCharCode.apply(null, raw)));
+      await keyboardDown();
+      show(html);
+    } catch (err) { msg.textContent = "비밀번호가 맞지 않는다."; }
+  };
+  var saved = get();
+  if (saved) unlock(b64(saved)).then(show, function () { put(null); f.hidden = false; });
+  else f.hidden = false;
+})();
+</script>
+</body></html>
